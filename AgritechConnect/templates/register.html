@@ -24,47 +24,33 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="input-group">
-                    {{ form.first_name }}
-                    <!-- <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="example@email.com"> -->
+                    {{ form.first_name.label_tag }} {{ form.first_name }}
                 </div>
                 <div class="input-group">
-                    {{ form.last_name }}
-                    <!-- <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="example@email.com"> -->
+                    {{ form.last_name.label_tag }} {{ form.last_name }}
                 </div>
                 <div class="input-group">
-                    {{ form.email }}
-                    <!-- <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="example@email.com"> -->
+                    {{ form.email.label_tag }} {{ form.email }}
                 </div>
                 <div class="input-group">
-                    {{ form.phone_number }}
-                    <!-- <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="example@email.com"> -->
+                    {{ form.phone_number.label_tag }} {{ form.phone_number }}
                 </div>
                 <div class="input-group">
-                    {{ form.password1 }}
-                    <!-- <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="example@email.com"> -->
+                    {{ form.password1.label_tag }} {{ form.password1 }}
                 </div>
-
                 <div class="input-group">
-                    {{ form.password2 }}
-                    <!-- <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Password"> -->
+                    {{ form.password2.label_tag }} {{ form.password2 }}
                 </div>
-
                 <button type="submit" class="btn">Sign Up</button>
                 <div class="social-login">
                     <p>or sign up with</p>
                     <div class="social-icons">
-                        <a href="#"><img src="facebook-icon.png" alt="Facebook"></a>
-                        <a href="#"><img src="google-icon.png" alt="Google"></a>
-                        <a href="#"><img src="apple-icon.png" alt="Apple"></a>
+                        <a href="#"><img src="{% static 'images/facebook-icon.png' %}" alt="Facebook"></a>
+                        <a href="#"><img src="{% static 'images/google-icon.png' %}" alt="Google"></a>
+                        <a href="#"><img src="{% static 'images/apple-icon.png' %}" alt="Apple"></a>
                     </div>
                 </div>
-                <!-- <p class="signin-link">Have an account? <a href="#">Sign in</a></p> -->
+                <p class="signin-link">Have an account? <a href="{% url 'login' %}">Login</a></p>
             </form>
         </div>
         <div class="image-container"></div>

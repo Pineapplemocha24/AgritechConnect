@@ -1,13 +1,12 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
+from django.db import models
 from django.core.validators import RegexValidator
 
-# Farmer
 class Farmer(AbstractUser):
+    # You don't need to redefine `password`, `groups`, or `user_permissions`
     first_name = models.CharField(max_length=30, null=False)
     last_name = models.CharField(max_length=30, null=False)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=128)
+    email = models.EmailField(unique=True, null=False)
     phone_number = models.CharField(
         max_length=15,
         validators=[RegexValidator(r'^\+?1?\d{9,15}$')],
@@ -15,18 +14,17 @@ class Farmer(AbstractUser):
     )
     regNo = models.CharField(max_length=10, unique=True, blank=True)
 
-    # Define groups and user_permissions with related_name to avoid conflicts
-    groups = models.ManyToManyField(Group, related_name='farmer_set', blank=True)
-    user_permissions = models.ManyToManyField(Permission, related_name='farmer_permissions_set', blank=True)
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number']
 
     def save(self, *args, **kwargs):
         if not self.regNo:
-            # Get the number of existing farmers and add 1 for the new one
             last_fmr_number = Farmer.objects.count()
             new_fmr_number = last_fmr_number + 1
-            self.regNo = f"FMR{new_fmr_number:04d}"  # Format as "FMR0001", "FMR0002", etc.
+            self.regNo = f"FMR{new_fmr_number:04d}"
+        print(f"Saving Farmer: {self.email}, {self.first_name}, {self.last_name}")
         super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-
