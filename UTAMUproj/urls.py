@@ -22,5 +22,5 @@ from AgritechConnect import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('AgritechConnect.urls')),
-
+    path('accounts/', include('allauth.urls')),
 ]
