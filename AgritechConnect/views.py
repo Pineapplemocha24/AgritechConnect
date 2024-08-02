@@ -26,7 +26,7 @@ def login(request):
             password = form.cleaned_data.get('password')
             user = authenticate(request, username=email, password=password)
             if user is not None:
-                login(request, user)
+                auth_login(request, user)
                 return redirect('index')  # Redirect to the index page after login
             else:
                 form.add_error(None, "Invalid email or password.")
