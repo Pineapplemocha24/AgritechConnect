@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-ly_5zy&yj2sf)7)-0c0plj5ex#uvm0hu#1w^1h+a798722se#&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'UTAMUproj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'agritechconnect',
+        'NAME': 'atcproject',
         'USER': 'Blessing',
         'PASSWORD': 'Born2002@24',
         'HOST': 'localhost',
