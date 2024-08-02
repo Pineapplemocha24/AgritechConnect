@@ -1,43 +1,44 @@
 from django.shortcuts import render, redirect
-from .models import *
-from django.contrib.auth import login, authenticate, login, logout
-from django.shortcuts import render
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib import messages
-from .forms import *
-from django.contrib import messages
+from .models import Farmer
+from .forms import RegisterForm, LoginForm
 
-
-
-#Login
-def register_view(request):
-    msg = None
+# Register
+def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=True)
-            user.save()
+            form.save()
             return redirect('login')
         else:
-            msg = 'form is invalid' 
+            print(form.errors)  # Print form errors to debug
     else:
         form = RegisterForm()
-    return render (request, 'register.html', {'form': form, 'msg': msg})   
+    return render(request, 'register.html', {'form': form})
 
-def login_view(request):
-    form = LoginForm(request.POST)
-    msg = None
+# Login
+def login(request):
     if request.method == 'POST':
+        form = LoginForm(request, data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('email')
+            email = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(email=email, password=password)
+            user = authenticate(request, username=email, password=password)
             if user is not None:
-                login(request, user)
-            else: 
-                msg = 'Invalid Login Credentials'
-                
-        else:
-            msg = 'Error validating form'
+                auth_login(request, user)
+                return redirect('index')  # Redirect to the index page after login
+            else:
+                form.add_error(None, "Invalid email or password.")
+    else:
+        form = LoginForm()
     
-    return render(request, 'login.html', {'form': form, 'msg': msg})
-            
+    return render(request, 'login.html', {'form': form})
+
+def logout(request):
+    auth_logout(request)
+    return redirect('index')
+
+# Index
+def index(request):
+    return render(request, 'index.html')
