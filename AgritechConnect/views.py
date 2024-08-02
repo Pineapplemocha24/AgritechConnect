@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login as auth_login, logout
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib import messages
 from .models import Farmer
 from .forms import RegisterForm, LoginForm
@@ -34,6 +34,10 @@ def login(request):
         form = LoginForm()
     
     return render(request, 'login.html', {'form': form})
+
+def logout(request):
+    auth_logout(request)
+    return redirect('index')
 
 # Index
 def index(request):

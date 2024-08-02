@@ -61,9 +61,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'login' %}">Login</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -73,7 +82,11 @@
         <div class="container">
             <h1>Welcome to AgritechConnect</h1>
             <p>Empowering Ugandan farmers with up-to-date market information, weather forecasts, and peer-to-peer connections.</p>
-            <a href="{% url 'register' %}" class="btn btn-custom">Get Started</a>
+            {% if user.is_authenticated %}
+                <a href="#" class="btn btn-custom">Go to Dashboard</a>
+            {% else %}
+                <a href="{% url 'register' %}" class="btn btn-custom">Get Started</a>
+            {% endif %}
         </div>
     </section>
 
