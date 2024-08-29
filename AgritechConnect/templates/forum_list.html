@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Forum - AgritechConnect{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Forum</h2>
+    <a href="{% url 'create_post' %}" class="btn btn-custom mb-3">Create New Post</a>
+    <ul class="list-group">
+        {% for post in posts %}
+        <li class="list-group-item">
+            <a href="{% url 'forum_detail' post.id %}">{{ post.title }}</a> by {{ post.author.first_name }} {{ post.author.last_name }} on {{ post.created_at|date:"F d, Y" }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

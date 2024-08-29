@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Market Information - AgritechConnect{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ market_data.title }}</h2>
+    <p>{{ market_data.introduction }}</p>
+    
+    <div class="row">
+        {% for section in market_data.sections %}
+        <div class="col-md-6 mb-4">
+            <div class="p-4 border rounded">
+                <h3>{{ section.heading }}</h3>
+                <p>{{ section.content }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Post - AgritechConnect{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Create New Post</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-custom">Submit</button>
+    </form>
+</div>
+{% endblock %}

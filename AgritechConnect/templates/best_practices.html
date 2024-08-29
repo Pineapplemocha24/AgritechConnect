@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Best Practices - AgritechConnect{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Best Practices</h2>
+    <p class="text-center mb-4">Watch and learn from our curated videos on best practices for successful farming. Stay updated with the latest techniques and tips to enhance your farming practices.</p>
+    <div class="row">
+        {% for video in videos %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <iframe class="card-img-top" width="100%" height="200" src="{{ video.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="card-body">
+                    <h5 class="card-title">{{ video.title }}</h5>
+                    <p class="card-text">{{ video.description }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">No best practices videos available at the moment.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

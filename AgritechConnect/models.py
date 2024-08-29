@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.core.validators import RegexValidator
+from django.db import models
+from django.contrib.auth import get_user_model
 
 
 class Farmer(AbstractUser):
@@ -21,12 +23,13 @@ class Farmer(AbstractUser):
     user_permissions = models.ManyToManyField(
         Permission, related_name='farmer_permissions_set', blank=True)
 
+    USERNAME_FIELD = 'email'  # Use email to log in
+    REQUIRED_FIELDS = ['first_name', 'last_name']  # Fields required during user creation
+
     def save(self, *args, **kwargs):
-        # Create username from first and last name if not set
         if not self.username:
             self.username = f"{self.first_name}{self.last_name}".lower()
 
-        # Generate regNo in the format "FMR0001", "FMR0002", etc.
         if not self.regNo:
             last_fmr_number = Farmer.objects.count()
             new_fmr_number = last_fmr_number + 1
@@ -45,3 +48,41 @@ class City(models.Model):
 
     class Meta:  # show the plural of city as cities instead of citys
         verbose_name_plural = 'cities'
+        
+
+
+class ForumPost(models.Model):
+    author = models.ForeignKey(Farmer, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+class Comment(models.Model):
+    post = models.ForeignKey(ForumPost, related_name='comments', on_delete=models.CASCADE)
+    author = models.ForeignKey(Farmer, on_delete=models.CASCADE)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"Comment by {self.author} on {self.post.title}"
+
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    posts = models.ManyToManyField(ForumPost, related_name='tags')
+
+    def __str__(self):
+        return self.name
+    
+class BestPracticeVideo(models.Model):
+    title = models.CharField(max_length=255)
+    video_url = models.URLField()
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+

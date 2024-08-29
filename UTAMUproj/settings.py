@@ -101,11 +101,11 @@ WSGI_APPLICATION = 'UTAMUproj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fyp',
+        'NAME': 'agritechconnect',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
-        'PORT': '3306',  # Default MySQL port
+        'PORT': '3307',  # Default MySQL port
     }
 }
 

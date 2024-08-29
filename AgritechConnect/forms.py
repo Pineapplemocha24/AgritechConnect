@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import *
 from django.forms import ModelForm, TextInput
+from django import forms
 
 
 class RegisterForm(UserCreationForm):
@@ -28,10 +29,10 @@ class RegisterForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(
+    email = forms.CharField(
         widget=forms.TextInput(
-            attrs={'class': 'form-control', 'placeholder': 'Your registration number please'}),
-        label="Username"
+            attrs={'class': 'form-control', 'placeholder': 'Enter you email'}),
+        label="Email"
     )
     password = forms.CharField(
         widget=forms.PasswordInput(
@@ -51,3 +52,15 @@ class CityForm(ModelForm):
                 'id': 'city-input'  # Add this line
             })
         }
+        
+
+class ForumPostForm(forms.ModelForm):
+    class Meta:
+        model = ForumPost
+        fields = ['title', 'content']
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+

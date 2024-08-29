@@ -21,23 +21,15 @@
             <div class="form-header">
                 <h1>Welcome to AgritechConnect!</h1>
             </div>
-            <form method="post">
+            <form method="post" class="login-form">
                 {% csrf_token %}
                 <div class="input-group">
-                    {{ form.username.label_tag }} {{ form.username }}
+                    {{ form.email.label_tag }} {{ form.email }}
                 </div>
                 <div class="input-group">
                     {{ form.password.label_tag }} {{ form.password }}
                 </div>
-                <button type="submit" class="btn btn-custom">Login</button>
-                <!-- <div class="social-login">
-                    <p>or sign up with</p>
-                    <div class="social-icons">
-                        <a href="#"><img src="{% static 'images/facebook-icon.png' %}" alt="Facebook"></a>
-                        <a href="#"><img src="{% static 'images/google-icon.png' %}" alt="Google"></a>
-                        <a href="#"><img src="{% static 'images/apple-icon.png' %}" alt="Apple"></a>
-                    </div>
-                </div> -->
+                <center><button type="submit" class="btn btn-custom">Login</button></centre>
                 <p class="signin-link">Have no account? <a href="{% url 'register' %}">Register</a></p>
             </form>
         </div>
