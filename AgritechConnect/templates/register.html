@@ -42,18 +42,19 @@
                     {{ form.password2.label_tag }} {{ form.password2 }}
                 </div>
                 <button type="submit" class="btn">Sign Up</button>
-                <div class="social-login">
+                <br>
+                <!-- <div class="social-login">
                     <p>or sign up with</p>
                     <div class="social-icons">
                         <a href="#"><img src="{% static 'images/facebook-icon.png' %}" alt="Facebook"></a>
                         <a href="#"><img src="{% static 'images/google-icon.png' %}" alt="Google"></a>
                         <a href="#"><img src="{% static 'images/apple-icon.png' %}" alt="Apple"></a>
                     </div>
-                </div>
+                </div> -->
                 <p class="signin-link">Have an account? <a href="{% url 'login' %}">Login</a></p>
             </form>
         </div>
-        <div class="image-container"></div>
+        <div class="image-container-register"></div>
     </div>
 </body>
 

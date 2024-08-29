@@ -101,7 +101,7 @@ WSGI_APPLICATION = 'UTAMUproj.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'atcproject',
+        'NAME': 'fyp',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
